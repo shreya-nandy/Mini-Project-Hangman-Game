@@ -2,14 +2,10 @@ import random
 
 # ------------------ WORD BANK ------------------
 categories = {
-    "1": ("Food", ["rice", "momo", "pizza", "phuchka", "pastry", "burger", "biryani", "butter chicken", "chana masala", "dal makhani", "rogan josh", "tandoori chicken", "masala dosa", "rasam", "sambar", "vindaloo", "kadhi chawal", "aloo paratha", "rajma chawal", "chole bhature"
-    ]),
-    "2": ("Animals", ["panda", "cat", "dog", "lion", "tiger", "elephant","giraffe", "bear", "rabbit", "monkey", "horse"
-    ]),
-    "3": ("Birds", ["crow", "eagle", "peacock", "sparrow", "parrot", "penguin", "owl", "duck", "flamingo"
-    ]),
-    "4": ("Programming Languages", ["python", "java", "javascript", "c plus plus", "c sharp", "ruby", "php", "go", "swift", "kotlin"
-    ])
+    "1": ("Food", ["rice", "momo", "pizza", "phuchka", "pastry", "burger", "biryani", "butter chicken", "chana masala", "dal makhani", "rogan josh", "tandoori chicken", "masala dosa", "rasam", "sambar", "vindaloo", "kadhi chawal", "aloo paratha", "rajma chawal", "chole bhature"]),
+    "2": ("Animals", ["panda", "cat", "dog", "lion", "tiger", "elephant", "giraffe", "bear", "rabbit", "monkey", "horse"]),
+    "3": ("Birds", ["crow", "eagle", "peacock", "sparrow", "parrot","penguin", "owl", "duck", "flamingo"]),
+    "4": ("Programming Languages", ["python", "java", "javascript", "c plus plus", "c sharp", "ruby", "php", "go", "swift", "kotlin"])
 }
 
 # ------------------ GAME START ------------------
@@ -30,7 +26,8 @@ word = random.choice(categories[choice][1]).lower()
 # Pre-fill spaces automatically
 guessed_word = [" " if ch == " " else "_" for ch in word]
 
-attempts = 8
+max_attempts = 8
+attempts = max_attempts
 guessed_letters = set()
 
 print("\n🎯 Game Started! Guess the word")
@@ -63,13 +60,16 @@ while attempts > 0:
         attempts -= 1
         print("❌ Wrong guess!")
 
-    # WIN CONDITION (spaces ignored)
+    # WIN CONDITION
     if "_" not in guessed_word:
+        attempts_used = max_attempts - attempts
         print("\n🎉 YOU WIN!")
-        print("The word was:", word.upper())
+        print(f"The word was: {word.capitalize()}")
+        print(f"Attempts used: {attempts_used}/{max_attempts}")
         break
 
 # ------------------ GAME OVER ------------------
 if attempts == 0:
     print("\n💀 GAME OVER!")
-    print("The word was:", word.upper())
+    print(f"The word was: {word.capitalize()}")
+    print(f"Attempts used: {max_attempts}/{max_attempts}")
